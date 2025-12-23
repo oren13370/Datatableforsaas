@@ -281,9 +281,9 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-slate-200">
-      <div className="p-6 border-b border-slate-200">
+      <div className="p-4 md:p-6 border-b border-slate-200">
         <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-          <div className="relative flex-1 max-w-md">
+          <div className="relative flex-1 w-full md:max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 size-4" />
             <Input
               type="text"
@@ -303,7 +303,7 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>
+              <TableHead className="min-w-[200px]">
                 <button
                   onClick={() => handleSort("title")}
                   className="flex items-center gap-1 hover:text-slate-900"
@@ -312,7 +312,7 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
                   <ArrowUpDown className="size-3" />
                 </button>
               </TableHead>
-              <TableHead>
+              <TableHead className="min-w-[150px]">
                 <button
                   onClick={() => handleSort("department")}
                   className="flex items-center gap-1 hover:text-slate-900"
@@ -321,7 +321,7 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
                   <ArrowUpDown className="size-3" />
                 </button>
               </TableHead>
-              <TableHead>
+              <TableHead className="min-w-[100px]">
                 <button
                   onClick={() => handleSort("version")}
                   className="flex items-center gap-1 hover:text-slate-900"
@@ -330,7 +330,7 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
                   <ArrowUpDown className="size-3" />
                 </button>
               </TableHead>
-              <TableHead>
+              <TableHead className="min-w-[130px]">
                 <button
                   onClick={() => handleSort("lastUpdated")}
                   className="flex items-center gap-1 hover:text-slate-900"
@@ -339,8 +339,8 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
                   <ArrowUpDown className="size-3" />
                 </button>
               </TableHead>
-              <TableHead>Approved</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead className="min-w-[120px]">Approved</TableHead>
+              <TableHead className="text-right min-w-[80px]">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -409,20 +409,21 @@ export function CustomerTable({ departmentFilter }: CustomerTableProps) {
       </div>
 
       {filteredAndSortedCustomers.length > 0 && (
-        <div className="p-4 border-t border-slate-200 flex items-center justify-between">
-          <div className="text-sm text-slate-600">
+        <div className="p-3 md:p-4 border-t border-slate-200 flex flex-col sm:flex-row gap-3 items-center justify-between">
+          <div className="text-sm text-slate-600 text-center sm:text-left">
             Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
             {Math.min(currentPage * itemsPerPage, filteredAndSortedCustomers.length)} of{" "}
             {filteredAndSortedCustomers.length} protocols
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap justify-center">
             <Button
               variant="outline"
               size="sm"
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
             >
-              Previous
+              <span className="hidden sm:inline">Previous</span>
+              <span className="sm:hidden">Prev</span>
             </Button>
             <div className="flex items-center gap-1">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
